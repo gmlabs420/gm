@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World - Purple Hat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        .message {
+            font-size: 24px;
+            color: #333;
+        }
+        .hat {
+            color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        Hello World - <span class="hat">Purple Hat</span>
+    </div>
+</body>
+</html>
+
+
+
+
+<footer class="footer-style">
+    <a href="https://example.com" target="_blank" class="footer-link">OTG</a>
+    <a href="https://example.com" target="_blank" class="footer-link">NOUNS</a>
+    <a href="https://example.com" target="_blank" class="footer-link">OP</a>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggle = document.getElementById('pageToggle');
+        const isToggledOn = localStorage.getItem('isToggled') === 'true';
+        toggle.checked = isToggledOn;
+        if (isToggledOn && !window.location.href.includes('index2.html')) {
+            window.location.href = 'index2.html';
+        } else if (!isToggledOn && window.location.href.includes('index2.html')) {
+            window.location.href = 'index.html';
+        }
+        toggle.addEventListener('change', function() {
+            localStorage.setItem('isToggled', this.checked);
+            if (this.checked) {
+                window.location.href = 'index2.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    });
+    </script>
+    <script src="app.js"></script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+// Handle toggles for both pages
+const pageToggle1 = document.getElementById('pageToggle1');
+const pageToggle2 = document.getElementById('pageToggle2');
+const footerToggle1 = document.getElementById('footerToggle1');
+    footerToggle1.addEventListener('change', function() {
+        const targetPage = this.checked ? 'index2.html' : 'index.html';
+        window.location.href = targetPage + '?bottom=true';
+    });
+
+    // Logic to scroll to the bottom if 'bottom' parameter is present in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('bottom') === 'true') {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+if(pageToggle1) {
+    pageToggle1.addEventListener('change', function() {
+        window.location.href = this.checked ? 'index2.html' : 'index.html';
+    });
+}
+
+if(pageToggle2) {
+    pageToggle2.addEventListener('change', function() {
+        window.location.href = this.checked ? 'index.html' : 'index2.html';
+    });
+}
+
+if(footerToggle1) {
+    footerToggle1.addEventListener('change', function() {
+        const targetPage = this.checked ? 'index2.html' : 'index.html';
+        window.location.href = targetPage + '?bottom=true';
+    });
+}
+
+if(footerToggle2) {
+    footerToggle2.addEventListener('change', function() {
+        const targetPage = this.hidden ? 'index.html' : 'index2.html';
+        window.location.href = targetPage + '?bottom=true';
+    });
+}
+    
+        // Setup connection to the wallet
+        const connectButton = document.querySelector('.connect-btn'); // Adjust class as needed
+        if (connectButton) {
+            connectButton.addEventListener('click', async () => {
+                if (window.ethereum) {
+                    try {
+                        await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        console.log('Wallet is connected');
+                    } catch (error) {
+                        console.error('User denied account access:', error);
+                    }
+                } else {
+                    console.log('Please install a wallet!');
+                }
+            });
+        } else {
+            console.log('Connect button not found');
+        }
+
+        // Adjust quantity for minting NFTs
+        document.getElementById('increaseQuantity').addEventListener('click', function() {
+            adjustQuantity(true, 'nftQuantity'); // Use IDs specific to index.html
+        });
+        document.getElementById('decreaseQuantity').addEventListener('click', function() {
+            adjustQuantity(false, 'nftQuantity'); // Use IDs specific to index.html
+        });
+
+        function adjustQuantity(isIncrease, elementId) {
+            const quantityInput = document.getElementById(elementId);
+            let currentValue = parseInt(quantityInput.value, 10);
+            currentValue = isIncrease ? currentValue + 1 : Math.max(1, currentValue - 1);
+            quantityInput.value = currentValue;
+        }
+
+        // Setup accordion functionality, if accordions are used on index.html
+        const accordions = document.querySelectorAll('.accordion'); // Adjust class if different on index.html
+        accordions.forEach(accordion => {
+            accordion.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+            });
+        });
+    });
+</script>
+<script src="app.js"></script>

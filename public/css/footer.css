@@ -1,0 +1,91 @@
+/* --------------------------------- */
+
+.footer-style {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    padding-bottom: 70px; /* Adjust this value as needed for your design */
+    text-align: center;
+    background-color: #0e0e0e;
+}
+
+/* --------------------------------- */
+
+.footer-links {
+    text-decoration: none;
+    color: #00bbfa;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+
+
+}
+
+/* --------------------------------- */
+
+.footer-link {
+    text-decoration: none;
+    color: #00bbfa; /* This will ensure that the color is blue */
+    justify-content: center;
+    gap: 50px;
+}
+
+/* --------------------------------- */
+
+.footer-toggle-container {
+    margin-top: 20px;
+    margin-bottom: 20px; /* Add some space between the toggle and the links */
+}
+
+/* --------------------------------- */
+
+.footer-link:hover {
+    color: #00588f;
+}
+
+/* --------------------------------- */
+
+.footer2-style  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 70px; /* Adjust this value as needed for your design */
+    text-align: center;
+    background-color: #0e0e0e;
+}
+
+/* --------------------------------- */
+
+.footer2-link {
+    text-decoration: none;
+    color: #00bbfa; /* This will ensure that the color is blue */
+    justify-content: center;
+    gap: 50px;
+}
+
+/* --------------------------------- */
+
+.footer2-toggle-container {
+    margin-top: 20px;
+    margin-bottom: 20px; /* Add some space between the toggle and the links */
+}
+
+/* --------------------------------- */
+
+.footer2-link:hover {
+    color: #00588f;
+}
+
+
+/* --------------------------------- */
+/* Footer toggle for page navigation */
+#footerToggle1:checked + .toggle-label::after,
+#footerToggle2:checked + .toggle2-label::after {
+    transform: translateX(26px); /* Adjusts for the footer toggle specifically */
+    /* Apply any additional styling needed for the footer toggle's "ON" state here */
+}
+
+/* --------------------------------- */

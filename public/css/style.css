@@ -1,0 +1,193 @@
+/* Base Resets */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    
+}
+
+/* --------------------------------- */
+
+.page1 h1,
+.page1 h2,
+.page1 h3,
+.page1 h4,
+.page1 p {
+    color: #ffeeb5f4;
+    text-shadow: 
+    0 0 6px rgba(255, 238, 181, 0.8), /* Glowing effect */
+    0 0 4px rgba(9, 56, 0, 0.528), /* Larger glow for softer edge */
+    0 0 2px rgba(0, 75, 11, 0.531); /* Even larger glow for extended soft edge */
+}
+
+/* --------------------------------- */
+
+.page2 h1,
+.page2 h2,
+.page2 h3,
+.page2 h4,
+.page2 p {
+    color: #ffeeb5; /* Existing color style */
+    text-shadow: 
+        0 0 8px rgba(255, 238, 181, 0.25), /* Glowing effect */
+        0 0 10px rgba(38, 38, 38, 0.25), /* Larger glow for softer edge */
+        0 0 4px rgba(0, 75, 11, 0.243); /* Even larger glow for extended soft edge */
+}
+
+
+/* --------------------------------- */
+
+.page1 h1 {
+    font-size: 2em;
+}
+
+.page1 h2 {
+    font-size: 1.5em;
+}
+
+.page1 h3 {
+    font-size: 1.17em;
+}
+
+.page1 h4 {
+    font-size: 1em;
+}
+
+.page1 p {
+    font-size: 0.875em;
+}
+
+/* --------------------------------- */
+
+.page2 h1 {
+    font-size: 2em;
+}
+
+.page2 h2 {
+    font-size: 1.5em;
+}
+
+.page2 h3 {
+    font-size: 1.17em;
+}
+
+.page2 h4 {
+    font-size: 1em;
+}
+
+.page2 p {
+    font-size: 0.875em;
+}
+
+/* --------------------------------- */
+
+.page1 {
+    font-family: 'Londrina Solid', cursive;
+    background-color: #4caf50;
+    color: #333;
+    padding: 0px;
+}
+
+/* --------------------------------- */
+
+.page2 {
+    font-family: 'Londrina Solid', cursive;
+    background-color: #0c0c11;
+    color: #333;
+    padding: 0px;
+}
+
+/* --------------------------------- */
+
+.main-content {
+    text-align: center;
+    width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* This ensures the body takes at least the full height of the viewport */
+        flex-direction: column; /* This stacks items vertically */
+      }
+      
+
+
+/* --------------------------------- */
+
+.gradient-background {
+    background: linear-gradient(to top, #4caf50, #4caf50, #feb47b);
+}
+/* --------------------------------- */
+
+.gradient-background2 {
+    background: linear-gradient(to bottom, #000000, #2f063c, #feb47b);
+}  
+
+/* --------------------------------- */
+
+.gm-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #4caf50;
+    color: #ffeeb5;    
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to top left, #ffeeb51a, rgba(0, 0, 0, 0.212)); 
+    box-shadow: 
+        0 2px 4px rgba(135, 135, 135, 0.066), 
+        inset 0 1px 3px #ffeeb5be, 
+        inset 0 -2px 6px rgb(0, 0, 0);
+    text-shadow: 
+    0 0 8px rgba(255, 238, 181, 0.8), /* Glowing effect */
+    0 0 10px rgba(38, 38, 38, 0.766), /* Larger glow for softer edge */
+    0 0 4px rgb(35, 0, 75); /* Even larger glow for extended soft edge */
+    border: 1px solid #ffebba70; /* White border for visibility */
+    box-shadow: 
+        inset 0 1px 1px rgba(237, 207, 108, 0.505), /* Inset shadow */
+        0 0 8px rgba(247, 104, 255, 0.485), /* Outer glow effect */
+        0 0 10px rgba(0, 255, 0, 0.5); /* Additional outer glow for enhanced visibility */
+
+}
+
+/* --------------------------------- */
+
+.gn-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #020112;
+    color: #ffeeb5;    
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #200426; 
+    background-image: linear-gradient(to top left, #ffeeb51a, rgba(0, 0, 0, 0.212)); 
+    box-shadow: 
+        0 2px 4px rgba(135, 135, 135, 0.066), 
+        inset 0 1px 3px #ffeeb5be, 
+        inset 0 -2px 6px rgb(0, 0, 0);
+    text-shadow: 
+    0 0 8px rgba(255, 238, 181, 0.8), /* Glowing effect */
+    0 0 10px rgba(38, 38, 38, 0.766), /* Larger glow for softer edge */
+    0 0 4px rgb(35, 0, 75); /* Even larger glow for extended soft edge */
+    border: 1px solid #ffebba70; /* White border for visibility */
+    box-shadow: 
+        inset 0 1px 1px rgba(237, 207, 108, 0.505), /* Inset shadow */
+        0 0 8px rgba(247, 104, 255, 0.485), /* Outer glow effect */
+        0 0 10px rgba(0, 255, 0, 0.5); /* Additional outer glow for enhanced visibility */
+
+}
+
+/* --------------------------------- */
+
+#pageToggle1:checked + .toggle-label {
+    transform: translateX(26px);
+}
+
+/* --------------------------------- */
+
+#pageToggle2:checked + .toggle2-label::after {
+    transform: translateX(26px);
+}
+

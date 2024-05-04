@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GN.v1</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/bundle.js"></script>
+</head>
+
+
+
+<body class="page2 gradient-background2">
+    <header class="top-nav2">
+        <div class="left">
+            <h1 class="londrina-solid-black">GN.v1</h1>
+            <div class="toggle2-container">
+                <input type="checkbox" id="pageToggle2" hidden checked />
+                <label for="pageToggle2" class="toggle2-label"></label>
+            </div>
+        </div>
+        <div class="right">
+            <nav class="dropdown2">
+                <button id="dropdown2-button" class="dropdown-button" aria-haspopup="true" aria-expanded="false">              
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB4PSIwIiB5PSIwIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+PGcgZGF0YS1uYW1lPSJmaWxsZWQgb3V0bGluZSI+PHBhdGggZD0iTTQ2NCAzNTguODZ2OTQuMjVhMjkuMjIzIDI5LjIyMyAwIDAgMS01Ljg1IDE3LjU1bC0yLjczIDMuNjRhMjkuMjQ5IDI5LjI0OSAwIDAgMS0zNy44IDcuOTFsLTUyLjE3LTI5LjQ4YTIyNy4xOTQgMjI3LjE5NCAwIDAgMC0yMjAtMS45OWwtNjIuMjYgMzMuNzNBMjkuMjU5IDI5LjI1OSAwIDAgMSA0MCA0NTguNzR2LTk5Ljg4bDkyLjAxLTIwLjQ0YTU2MC44IDU2MC44IDAgMCAxIDI0Ny43NSAxWiIgc3R5bGU9IiIgZmlsbD0iIzJmMDYzYyIgZGF0YS1vcmlnaW5hbD0iIzgzNGIxMCIgY2xhc3M9IiIgb3BhY2l0eT0iMSI+PC9wYXRoPjxwYXRoIGQ9Ik00NjQgMzU4Ljg2djU3LjE5YTI5LjIyMyAyOS4yMjMgMCAwIDEtNS44NSAxNy41NWwtMi43MyAzLjY0YTI5LjI0OSAyOS4yNDkgMCAwIDEtMzcuOCA3LjkxbC01Mi4xNy0yOS40OGEyMjcuMTY4IDIyNy4xNjggMCAwIDAtMjIwLTEuOTlsLTYyLjI2IDMzLjczQTI5LjI1OSAyOS4yNTkgMCAwIDEgNDAgNDIxLjY4di02Mi44Mmw5Mi4wMS0yMC40NGE1NjAuOCA1NjAuOCAwIDAgMSAyNDcuNzUgMVoiIHN0eWxlPSIiIGZpbGw9IiMyZjA2M2MiIGRhdGEtb3JpZ2luYWw9IiM3MDQwMGUiIGNsYXNzPSIiIG9wYWNpdHk9IjEiPjwvcGF0aD48cGF0aCBkPSJNNDg4IDI5Ni4wNiA0NzIgMzUybC0zOC44IDcuNzQtMjguMDctNy43NGE1NjAuODU3IDU2MC44NTcgMCAwIDAtMjk4LjI2IDBsLTI4LjA3IDcuNzRMNDAgMzUybC0xNi01NS45NGEyODAuNzI1IDI4MC43MjUgMCAwIDEgMTEuODQtODAuNjZsLjQ2LTEuNTNBMjExLjg1NiAyMTEuODU2IDAgMCAxIDE3Ny4xIDcyLjE5cTcuOTY1LTIuNDYgMTYuMTktNC4yOGEyMTAuNzgyIDIxMC43ODIgMCAwIDEgNDUuOTctNS4wNWgyNi42OGEyMTEuOTcyIDIxMS45NzIgMCAwIDEgNDMuNjUgNC41NWw3LjI2IDEuNTNxOS45OSAyLjEgMTkuNjMgNS4xM0EyMTEuODU3IDIxMS44NTcgMCAwIDEgNDc2LjE2IDIxNS40IDI4MS4wODggMjgxLjA4OCAwIDAgMSA0ODggMjk2LjA2WiIgc3R5bGU9IiIgZmlsbD0iI2RiZGJkYiIgZGF0YS1vcmlnaW5hbD0iI2RiZGJkYiI+PC9wYXRoPjxwYXRoIGQ9Ik00ODggMjk2LjA2VjM0NGwtNTQuOC0xNS4xMi0yOC4wNy03Ljc0YTU2MC44NTcgNTYwLjg1NyAwIDAgMC0yOTguMjYgMGwtMjguMDcgNy43NEwyNCAzNDR2LTQ3Ljk0YTI4MC43MjUgMjgwLjcyNSAwIDAgMSAxMS44NC04MC42NmwuNDYtMS41M0EyMTEuODU2IDIxMS44NTYgMCAwIDEgMTc3LjEgNzIuMTlxNy45NjUtMi40NiAxNi4xOS00LjI4YTIxMC43ODIgMjEwLjc4MiAwIDAgMSA0NS45Ny01LjA1aDI2LjY4YTIxMS45NzIgMjExLjk3MiAwIDAgMSA0My42NSA0LjU1bDcuMjYgMS41M3E5Ljk5IDIuMSAxOS42MyA1LjEzQTIxMS44NTcgMjExLjg1NyAwIDAgMSA0NzYuMTYgMjE1LjQgMjgxLjA4OCAyODEuMDg4IDAgMCAxIDQ4OCAyOTYuMDZaIiBzdHlsZT0iIiBmaWxsPSIjZWJlYmViIiBkYXRhLW9yaWdpbmFsPSIjZWJlYmViIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggZD0iTTI4OCA2NGgtNjR2LS42MDdBMzEuMzkzIDMxLjM5MyAwIDAgMSAyNTUuMzkzIDMyaDEuMjE0QTMxLjM5MyAzMS4zOTMgMCAwIDEgMjg4IDYzLjM5M1oiIHN0eWxlPSIiIGZpbGw9IiMyZjA2M2MiIGRhdGEtb3JpZ2luYWw9IiM3NDQ2MzAiIGNsYXNzPSIiIG9wYWNpdHk9IjEiPjwvcGF0aD48cGF0aCBkPSJNNzYuMjIgMjk5Ljk4cS0uNjYgMTQuNzc1LS4wNSAyOS42My42MyAxNS4wNiAyLjYzIDMwLjEzTDI0IDM3NC44NnYtNzguOGEyODAuNzI1IDI4MC43MjUgMCAwIDEgMTEuODQtODAuNjZsLjQ2LTEuNTNBMjExLjggMjExLjggMCAwIDEgMTc3LjEgNzIuMTlsLTIxLjk4IDI2LjFhMzM3LjE2NSAzMzcuMTY1IDAgMCAwLTc4LjkgMjAxLjY5Wk00ODggMjk2LjA2djc4LjhsLTU0LjgtMTUuMTJxMS45OTUtMTUuMDYgMi42My0zMC4xMy42My0xNC44NS0uMDUtMjkuNjNhMzM3LjE2NSAzMzcuMTY1IDAgMCAwLTc4LjktMjAxLjY5bC0yMC40LTI0LjIyQTIxMS44NzEgMjExLjg3MSAwIDAgMSA0NzYuMTYgMjE1LjQgMjgxLjA4OCAyODEuMDg4IDAgMCAxIDQ4OCAyOTYuMDZaIiBzdHlsZT0iIiBmaWxsPSIjMmYwNjNjIiBkYXRhLW9yaWdpbmFsPSIjODM0YjEwIiBjbGFzcz0iIiBvcGFjaXR5PSIxIj48L3BhdGg+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjE2IiByPSI1NiIgc3R5bGU9IiIgZmlsbD0iIzJmMDYzYyIgZGF0YS1vcmlnaW5hbD0iIzcwNDAwZSIgY2xhc3M9IiIgb3BhY2l0eT0iMSI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjE2IiByPSI0OC41IiBzdHlsZT0iIiBmaWxsPSIjMmYwNjNjIiBkYXRhLW9yaWdpbmFsPSIjODM0YjEwIiBjbGFzcz0iIiBvcGFjaXR5PSIxIj48L2NpcmNsZT48cGF0aCBkPSJNMjU2IDI4MGE2NCA2NCAwIDEgMC02NC02NCA2NC4wNzIgNjQuMDcyIDAgMCAwIDY0IDY0Wm0wLTExMmE0OCA0OCAwIDEgMS00OCA0OCA0OC4wNTQgNDguMDU0IDAgMCAxIDQ4LTQ4WiIgZmlsbD0iIzAwMDAwMCIgb3BhY2l0eT0iMSIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIGQ9Ik03Ni4xNyAzMjkuNjFxLjYzIDE1LjA2IDIuNjMgMzAuMTNMMjQgMzc0Ljg2VjM0NFpNNDg4IDM0NHYzMC44NmwtNTQuOC0xNS4xMnExLjk5NS0xNS4wNiAyLjYzLTMwLjEzWiIgc3R5bGU9IiIgZmlsbD0iIzJmMDYzYyIgZGF0YS1vcmlnaW5hbD0iIzc0NDMwZSIgY2xhc3M9IiIgb3BhY2l0eT0iMSI+PC9wYXRoPjxwYXRoIGQ9Im0zMTguNSA2MS4xMDctNy4yNjItMS41MjhxLTcuODMzLTEuNjUtMTUuNzg5LTIuNzE0QTM5LjQ0NiAzOS40NDYgMCAwIDAgMjU2LjYxIDI0aC0xLjIyYTM5LjQ0NyAzOS40NDcgMCAwIDAtMzguNjkgMzIuMDM5IDIyMC4xNTkgMjIwLjE1OSAwIDAgMC0yNS4xNDIgNC4wNjFxLTguNDQgMS44NzYtMTYuNjI4IDQuMzkybC0uMDc2LjAyM0EyMjAuMTM5IDIyMC4xMzkgMCAwIDAgMjguNjM1IDIxMS41NzNsLS40NiAxLjUzMUEyODguNTM4IDI4OC41MzggMCAwIDAgMTYgMjk2LjA1OXY3OC44YTggOCAwIDAgMCAxMC4xMjcgNy43MTJMMzIgMzgwLjk1NHY3Ny43ODZhMzcuMjU4IDM3LjI1OCAwIDAgMCA1NSAzMi43Nmw2Mi4yNTktMzMuNzI5YTIxOS4yIDIxOS4yIDAgMCAxIDIxMi4yNTUgMS45Mmw1Mi4xNjcgMjkuNDc4YTM3LjMzOSAzNy4zMzkgMCAwIDAgNDguMTM4LTEwLjA2OWwyLjcyOS0zLjYzN0EzNy40NTUgMzcuNDU1IDAgMCAwIDQ3MiA0NTMuMTF2LTc0LjM2M2wxMy44NzMgMy44MjdBOCA4IDAgMCAwIDQ5NiAzNzQuODYydi03OC44YTI4OC41IDI4OC41IDAgMCAwLTEyLjE3Ni04Mi45NjJBMjE5Ljc3MyAyMTkuNzczIDAgMCAwIDMxOC41IDYxLjEwN1pNMjU1LjM5IDQwaDEuMjJhMjMuNDI0IDIzLjQyNCAwIDAgMSAyMS45MTcgMTUuMjM2IDIxOS41MTggMjE5LjUxOCAwIDAgMC0xMi41OS0uMzc0aC0yNi42NzZxLTIuODM4IDAtNS42NzUuMDc4QTIzLjQyNCAyMy40MjQgMCAwIDEgMjU1LjM5IDQwWm0tNzMuNyAzOS4xNThxNi41ODEtMS45MzYgMTMuMzM4LTMuNDQxYTIwNC4zMiAyMDQuMzIgMCAwIDEgNDQuMjMzLTQuODU1aDI2LjY3NmEyMDQuMzA4IDIwNC4zMDggMCAwIDEgNDIgNC4zNzNsNy4yNjIgMS41M2M1LjY1OSAxLjE5MSAxMS4yMjEgMi42NDEgMTYuNyA0LjI4NmwxOC44NjEgMjIuMzkyYTMyOS4wMzkgMzI5LjAzOSAwIDAgMSA3NS41NzYgMjQ2LjEwOWwtMTkuMDc2LTUuMjYyYTU2OC45ODEgNTY4Ljk4MSAwIDAgMC0zMDIuNTE5IDBsLTE5LjA4NCA1LjI2NGEzMjkuMSAzMjkuMSAwIDAgMSA3NS41ODItMjQ2LjExMVpNMzIgMzY0LjM1NnYtNjguM0EyNzIuNSAyNzIuNSAwIDAgMSA0My41IDIxNy43bC40NTktMS41MzFBMjA0LjEyOCAyMDQuMTI4IDAgMCAxIDE1MC43IDkxLjEyMWwtMS43IDIuMDE3YTM0NS4xIDM0NS4xIDAgMCAwLTc5LjI0NyAyNTguMTY3cS4xMzMgMS4yOTMuMjc1IDIuNTYxWm00MjQgODguNzU0YTIxLjM1NiAyMS4zNTYgMCAwIDEtNC4yNDkgMTIuNzQ5bC0yLjczMSAzLjY0MWEyMS4zIDIxLjMgMCAwIDEtMjcuNDY0IDUuNzQ1bC01Mi4xNjgtMjkuNDc5YTIzNS4xOTMgMjM1LjE5MyAwIDAgMC0yMjcuNzQ4LTIuMDZsLTYyLjI1NSAzMy43MjhhMjEuMjU4IDIxLjI1OCAwIDAgMS0yNS4xNTctMy42NjFBMjEuMTE4IDIxLjExOCAwIDAgMSA0OCA0NTguNzR2LTYuNDYyYTM3IDM3IDAgMCAwIDIxLjI3IDYuNjYyQTM3LjM4MiAzNy4zODIgMCAwIDAgODcgNDU0LjQ0NGw2Mi4yNi0zMy43M2EyMTkuMTcxIDIxOS4xNzEgMCAwIDEgMjEyLjI1NCAxLjkyMWw1Mi4xNjcgMjkuNDc4QTM3LjM2NiAzNy4zNjYgMCAwIDAgNDU2IDQ0OC4xODhabTAtMzcuMDZhMjEuMzYxIDIxLjM2MSAwIDAgMS00LjI0OSAxMi43NWwtMi43MyAzLjY0YTIxLjMgMjEuMyAwIDAgMS0yNy40NjUgNS43NDVsLTUyLjE2OC0yOS40NzlhMjM1LjE2NSAyMzUuMTY1IDAgMCAwLTIyNy43NDgtMi4wNmwtNjIuMjU1IDMzLjcyOGEyMS4yNTggMjEuMjU4IDAgMCAxLTI1LjE1Ny0zLjY2MUEyMS4xMTggMjEuMTE4IDAgMCAxIDQ4IDQyMS42OHYtNDUuMTRsNjEtMTYuODI2YTU1Mi45OSA1NTIuOTkgMCAwIDEgMjk0LjAwOSAwbDUzIDE0LjYxOVptMjQtNTEuNjk0LTM4LjAyNS0xMC40ODkuMTE4LTEuMDNhMzQ1LjEyMyAzNDUuMTIzIDAgMCAwLTc4Ljk0Ni0yNTkuNTJBMjAzLjc2IDIwMy43NiAwIDAgMSA0NjguNSAyMTcuN2EyNzIuNDk0IDI3Mi40OTQgMCAwIDEgMTEuNSA3OC4zNTlaIiBmaWxsPSIjMDAwMDAwIiBvcGFjaXR5PSIxIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iIj48L3BhdGg+PC9nPjwvZz48L3N2Zz4=" />                            
+                </button>            
+                    <div id="dropdown2-content" class="dropdown2-content">               
+                        <a href="hellopurple.html" class="nav-link">
+                            <div class="gn-circle">GN</div>
+                            </a>
+                        <a href="hellogreen.html" class="nav-link">
+                        <div class="gm-circle">GM</div>
+                        </a>           
+                    </div>         
+                </nav>         
+                <button class="connect-btn2">Connect</button>    
+            </div> 
+        </header>
+    
+    <main class="main-content">
+        <button id="mintGmButton2">GN</button>
+        <script type="module" src="app.js"></script>
+
+
+        <section class="quantity-price-module2">
+            <h1>GN = <span id="mintPrice">.000420 ETH</span> per NFT</h1>
+            <div class="mint-options2">
+                <button id="decreaseQuantity" class="quantity-adjust2">-</button>
+                <input type="number" id="nftQuantity" class="nft-quantity-input2" value="1" min="1" />
+                <button id="increaseQuantity" class="quantity-adjust2">+</button>
+            </div>
+            <h2>Total Price: <span id="totalPriceEth">.000420 ETH</span></h2>
+            <h2>USD: <span id="totalPriceUsd">$0.00 USD</span></h2>
+        </section> 
+
+        <section class="accordion4-container">
+
+                
+
+                <div class="accordion4-section4">
+                    <button class="accordion4"><span><h2>AI GN Machine</h2></span><i class="fas fa-chevron-down"></i></button>
+                    <div class="panel4">
+                            
+                        <div class="container ai-text-container">
+                                <div class="recessed-field2">
+                                    <p id="aiGeneratedText">Your inspirational quote will appear here...</p>
+                                </div>
+                                <button id="generateTextButton" class="action-button">Generate</button>
+                                <button id="copyTextButton" class="action-button">Copy</button>
+                        </div>
+                
+                        <div class="container ai-image-container">
+                                <div class="recessed-field2">
+                                    <img id="aiGeneratedImage" src="" alt="AI-generated visual content" />
+                                </div>
+                                <button id="generateImageButton" class="action-button">Generate</button>
+                                <button id="copyImageButton" class="action-button">Copy</button>
+
+                        </div>
+                 </div>
+
+                </section>
+
+
+        <section class="gms-section2">
+            <h1>GNs</h1>
+            <p id="totalMinted2">Minted: 0</p>
+            <div id="gmGallery2"></div>
+        </section>
+
+        <section class="gm-leaderboard-section2">
+            <h1>GN Leaderboard</h1>
+            <ul id="leaderboardList2"></ul>
+            <button id="seeMoreButton2" class="see-more-btn2">See More</button>
+        </section>
+
+        <div class="accordion2-container">
+            <div class="accordion-section2">
+                <button class="accordion2"><span>GN.v1</span><i class="fas fa-chevron-down"></i></button>
+                <div class="panel2"><p>This is the content of the accordion 1 - index2.</p></div>
+            </div>
+            <div class="accordion-section2">
+                <button class="accordion2"><span>Claim Details</span><i class="fas fa-chevron-down"></i></button>
+                <div class="panel2"><p>This is the content of the accordion 2.</p></div>
+            </div>
+            <div class="accordion-section2">
+                <button class="accordion2"><span>Hat Details</span><i class="fas fa-chevron-down"></i></button>
+                <div class="panel2"><p>This is the content of the accordion 3.</p></div>
+            </div>
+            <div class="accordion-section2">
+                <button class="accordion2"><span>Optimism Superchain</span><i class="fas fa-chevron-down"></i></button>
+                <div class="panel2"><p>This is the content of the accordion 3.</p></div>
+            </div>
+            <div class="accordion-section2">
+                <button class="accordion2"><span>OTG.WTF</span><i class="fas fa-chevron-down"></i></button>
+                <div class="panel2"><p>This is the content of the accordion 3.</p></div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="footer2-style page2">
+        <div class="footer2-toggle-container">
+            <input type="checkbox" id="footerToggle2" hidden checked />
+            <label for="footerToggle2" class="toggle2-label"></label>
+        </div> 
+        
+        <div>
+        <a href="https://example.com" target="_blank" class="footer2-link page2">OTG</a>
+        <a href="https://example.com" target="_blank" class="footer2-link page2">BASE</a>
+        <a href="https://example.com" target="_blank" class="footer2-link page2">Thirdweb</a>
+
+        </div>
+    </footer>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+    const connectButton2 = document.getElementById('connectButton2');
+    let isConnected = false;  // State to track connection
+
+    connectButton2.addEventListener('click', async () => {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                console.log('Connected account:', await signer.getAddress());
+                isConnected = true;
+                updateButtonState();
+            } catch (error) {
+                console.error('Error connecting:', error);
+                isConnected = false; // Reset connection status on error
+                updateButtonState();
+            }
+        } else {
+            console.log('MetaMask is not installed!');
+        }
+    });
+
+    function updateButtonState() {
+        if (isConnected) {
+            connectButton2.textContent = 'Connected';
+            connectButton2.disabled = true;
+            connectButton2.classList.add('connected'); // Use CSS for styling
+        } else {
+            connectButton2.textContent = 'Connect';
+            connectButton2.disabled = false;
+            connectButton2.classList.remove('connected'); // Remove CSS styling
+        }
+    }
+
+    ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length === 0) {
+            console.log('Disconnected. Please connect to MetaMask.');
+            isConnected = false;
+            updateButtonState();
+        } else {
+            isConnected = true;
+            updateButtonState();
+        }
+    });
+});
+
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const apiURL = 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=USD';
+            const quantityInput = document.getElementById('nftQuantity');
+            const totalPriceElementEth = document.getElementById('totalPriceEth');
+            const totalPriceElementUsd = document.getElementById('totalPriceUsd');
+            const mintPricePerNFT = 0.000420;
+            let ethPriceInUSD = 0;
+        
+            // Fetch current Ethereum price and update the UI
+            async function fetchEthPrice() {
+                try {
+                    const response = await fetch(apiURL);
+                    const data = await response.json();
+                    ethPriceInUSD = data.ethereum.usd;
+                    updatePrices(parseInt(quantityInput.value, 10));
+                } catch (error) {
+                    console.error('Failed to fetch ETH price:', error);
+                }
+            }
+        
+            // Calculate and update total price based on the quantity
+            function updatePrices(quantity) {
+                const totalPriceEth = (quantity * mintPricePerNFT).toFixed(6);
+                const totalPriceUsd = (totalPriceEth * ethPriceInUSD).toFixed(2);
+                totalPriceElementEth.textContent = `${totalPriceEth} ETH`;
+                totalPriceElementUsd.textContent = `$${totalPriceUsd} USD`;
+            }
+    
+            // Adjust the quantity of NFTs to be minted
+            function adjustQuantity(isIncrease) {
+                let currentValue = parseInt(quantityInput.value, 10);
+                currentValue = isIncrease ? currentValue + 1 : Math.max(1, currentValue - 1);
+                quantityInput.value = currentValue;
+                updatePrices(currentValue);
+            }
+        
+            document.getElementById('increaseQuantity').addEventListener('click', () => adjustQuantity(true));
+            document.getElementById('decreaseQuantity').addEventListener('click', () => adjustQuantity(false));
+    
+            // Accordion functionality
+            document.querySelectorAll('.accordion, .accordion2, .accordion3, .accordion4').forEach(accordion => {
+                accordion.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    panel.style.maxHeight = this.classList.contains('active') ? `${panel.scrollHeight}px` : null;
+                });
+            });
+    
+            // Handling page and footer toggles
+            const pageToggle = document.getElementById('pageToggle2');
+            pageToggle && pageToggle.addEventListener('change', () => {
+                window.location.href = pageToggle.checked ? 'index2.html' : 'index.html';
+            });
+    
+            const footerToggle = document.getElementById('footerToggle2');
+            footerToggle && footerToggle.addEventListener('change', () => {
+                window.location.href = footerToggle.checked ? 'index2.html' : 'index.html';
+            });
+    
+            // Initialize and fetch the current ETH price
+            await fetchEthPrice();
+        });
+    
+        // Button click event to generate text using an API call
+        document.getElementById("generateTextButton").addEventListener("click", function() {
+            const prompt = "Good Night";  // Example prompt
+            const maxTokens = 50;  // Maximum tokens for the generated text
+    
+            fetch('/api/generate-text', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: prompt, maxTokens: maxTokens })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("aiGeneratedText").innerText = data.choices[0].text;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    
+        document.addEventListener('DOMContentLoaded', function() {
+    const mintGmButton2 = document.getElementById("mintGmButton2");
+
+    if (mintGmButton2) {
+        mintGmButton2.addEventListener("click", function() {
+            const quantityInput = document.getElementById('nftQuantity');
+            const quantity = parseInt(quantityInput.value, 10); // Get the user-specified quantity
+            const receiverAddress = 'user_ethereum_address'; // This should be dynamically determined or input by the user
+
+            fetch('/claim', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    receiver: receiverAddress,
+                    tokenId: 1, // Token ID 1 for this button
+                    quantity: quantity,
+                    currency: 'ETH', // Or any other currency if applicable
+                    pricePerToken: '0.000420', // Price per token, ensure this is synced with your contract logic
+                    allowlistProof: [], // If using a merkle proof for allowlists
+                    data: {} // Any extra data required by the smart contract
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Minting successful:', data);
+            })
+            .catch(error => {
+                console.error('Minting error:', error);
+            });
+        });
+
+            // Function to copy text to clipboard
+        function copyTextToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                console.log('Text successfully copied to clipboard');
+            }).catch(function(err) {
+                console.error('Could not copy text to clipboard: ', err);
+            });
+        }
+
+        // Event listener to handle the text copy
+        document.getElementById("copyTextButton").addEventListener("click", function() {
+            const textToCopy = document.getElementById("aiGeneratedText").innerText;
+            copyTextToClipboard(textToCopy);
+        });
+
+        // Function to copy image to clipboard
+        function copyImageToClipboard(imageElement) {
+            imageElement.crossOrigin = 'anonymous'; // This may be needed depending on the CORS policy of the image source
+            const canvas = document.createElement('canvas');
+            canvas.width = imageElement.naturalWidth;
+            canvas.height = imageElement.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(imageElement, 0, 0);
+            canvas.toBlob(function(blob) {
+                navigator.clipboard.write([new ClipboardItem({'image/png': blob})]).then(function() {
+                    console.log('Image successfully copied to clipboard');
+                }).catch(function(err) {
+                    console.error('Could not copy image to clipboard: ', err);
+                });
+            }, 'image/png');
+        }
+
+        // Event listener to handle the image copy
+        document.getElementById("copyImageButton").addEventListener("click", function() {
+            const imageToCopy = document.getElementById("aiGeneratedImage");
+            copyImageToClipboard(imageToCopy);
+        });
+
+    }
+});
+
+    </script>
+
+    </body>
+    </html>
